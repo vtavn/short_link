@@ -14,14 +14,12 @@
   - reponse
   ```json
     {
-      "_id": "6247f20a117c8d752eb1d537",
-      "originUrl": "https://www.facebook.com/5",
-      "shortUrl": "srJ3UhW",
-      "__v": 0,
-      "deletedAt": null,
-      "updatedAt": null,
-      "createdAt": 1648882186679,
-      "totalView": 0,
-      "passwords": ""
+      "status": true,
+      "message": "Link Success!",
+      "data": {
+          "originUrl": "https://www.facebook.com/5",
+          "shortUrl": "http://localhost:3300/srJ3UhW",
+          "totalView": 0
+      }
     }
   ```
