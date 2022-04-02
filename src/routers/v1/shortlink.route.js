@@ -9,4 +9,10 @@ const router = express.Router()
 router.route('/create')
   .post(UrlController.createNew)
 
+/**
+ * /v1/short/all
+ */
+router.route('/all')
+  .get(UrlController.showAll)
+  
 export const UrlRoutes = router
