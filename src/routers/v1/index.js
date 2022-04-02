@@ -1,5 +1,5 @@
 import express from 'express'
-import { ShortLinkRoutes } from './shortlink.route'
+import { UrlRoutes } from './shortlink.route'
 
 const router = express.Router()
 
@@ -11,6 +11,6 @@ router.get('/', (req, res) => res.status(200).json({ msg: 'OK!' }))
 /**
  * Short Url
  */
-router.use('/short', ShortLinkRoutes)
+router.use('/short', UrlRoutes)
 
 export const apiV1 = router
