@@ -16,22 +16,43 @@ const createNew = async (req, res) => {
       
       const dataNew = {
         status: true,
-        message: "Link Success!",
+        message: 'Link Success!',
         data: {
           originUrl: createLinkSuccess.originUrl,
           shortUrl: base_url + createLinkSuccess.shortUrl,
           totalView: createLinkSuccess.totalView
         }
       }
-      res.status(HttpStatusCode.OK).json(dataNew)
+      return res.status(HttpStatusCode.OK).json(dataNew)
     } catch (error) {
-      res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({ status: false, message: error })
+      return res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({ status: false, message: error })
     }
   } else {
-    res.status(HttpStatusCode.UNAUTHENTICATED).json({ status: false, message: "Invalid longUrl" })
+    return res.status(HttpStatusCode.UNAUTHENTICATED).json({ status: false, message: 'Invalid longUrl' })
+  } 
+}
+
+const showAll = async (req, res) => {
+  try {
+    const getAll = await url.getAll()
+    console.log(getAll);
+    if (!getAll) {
+      return res.status(HttpStatusCode.OK).json({ status: true, message: 'Data not found' })
+    } else {
+      const allData = {
+        status: true,
+        message: 'Get Data Success',
+        data: getAll
+      }
+      return res.status(HttpStatusCode.OK).json(allData)
+    }
+
+  } catch (error) {
+    return res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({ status: false, message: error })
   }
 }
 
 export const UrlController = {
-  createNew
+  createNew,
+  showAll
 }

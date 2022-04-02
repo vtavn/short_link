@@ -12,7 +12,6 @@ const createNew = (originUrl, shortUrl, passwords) => {
           shortUrl: shortUrl,
           passwords: passwords
         })
-    
         const createLink = await dataItem.save()
     
         resolve(createLink)
@@ -23,6 +22,18 @@ const createNew = (originUrl, shortUrl, passwords) => {
   })
 }
 
+const getAll = () => {
+  return new Promise( async (resolve, reject) => {
+    try {
+      const getAll = await UrlModel.find()
+      resolve(getAll)
+    } catch (error) {
+      reject(error)
+    }
+  })
+}
+
 module.exports = {
-  createNew
+  createNew,
+  getAll
 }
