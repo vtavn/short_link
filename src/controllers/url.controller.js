@@ -3,7 +3,6 @@ import validUrl from 'valid-url'
 import { url } from '../services/index'
 
 const createNew = async (req, res) => {
-
   const param = req.body
 
   //base url
@@ -12,30 +11,25 @@ const createNew = async (req, res) => {
   // check url input
   if (validUrl.isUri(param.link)) {
     const shortLink = RandomString(process.env.LENGTH_SHORT_URL)
-
-    const dataNew = {
-      originUrl: param.link,
-      shortUrl: shortLink,
-      passwords: param.password
-    }
-
     try {
-
       const createLinkSuccess = await url.createNew(param.link, shortLink, param.password)
-      res.status(HttpStatusCode.OK).send(createLinkSuccess)
-
+      
+      const dataNew = {
+        status: true,
+        message: "Link Success!",
+        data: {
+          originUrl: createLinkSuccess.originUrl,
+          shortUrl: base_url + createLinkSuccess.shortUrl,
+          totalView: createLinkSuccess.totalView
+        }
+      }
+      res.status(HttpStatusCode.OK).json(dataNew)
     } catch (error) {
-
-      res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({ status: false, message: error , isError: true })
-    
+      res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({ status: false, message: error })
     }
-
   } else {
     res.status(HttpStatusCode.UNAUTHENTICATED).json({ status: false, message: "Invalid longUrl" })
   }
-  
-
-
 }
 
 export const UrlController = {
