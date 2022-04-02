@@ -18,8 +18,11 @@
   },
   "homepage": "https://github.com/vtavn/short_link#readme",
   "dependencies": {
+    "bluebird": "^3.7.2",
+    "connect-mongo": "^2.0.1",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
+    "mongoose": "^4.13.21",
     "valid-url": "^1.0.9"
   },
   "devDependencies": {

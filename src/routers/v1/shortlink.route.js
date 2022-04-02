@@ -1,5 +1,5 @@
 import express from 'express'
-import { ShortLinkController } from './../../controllers/shortlink.controller'
+import { UrlController } from './../../controllers/url.controller'
 
 const router = express.Router()
 
@@ -7,6 +7,6 @@ const router = express.Router()
  * /v1/short/create 
  */
 router.route('/create')
-  .post(ShortLinkController.createNew)
+  .post(UrlController.createNew)
 
-export const ShortLinkRoutes = router
+export const UrlRoutes = router
