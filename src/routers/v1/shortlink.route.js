@@ -15,4 +15,7 @@ router.route('/create')
 router.route('/all')
   .get(UrlController.showAll)
   
+router.route('/delete/:short')
+  .delete(UrlController.deleteShort)
+ 
 export const UrlRoutes = router

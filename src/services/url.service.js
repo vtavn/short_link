@@ -33,7 +33,31 @@ const getAll = () => {
   })
 }
 
+const getShortOne = (shortUrl) => {
+  return new Promise( async (resolve, reject) => {
+    try {
+      const findOne = await UrlModel.findOne({ shortUrl: shortUrl })
+      resolve(findOne)
+    } catch (error) {
+      reject(error)
+    }
+  })
+}
+
+const deleteShort = (shortUrl) => {
+  return new Promise( async (resolve, reject) => {
+    try {
+      const deleteShort = await UrlModel.deleteOne({ shortUrl: shortUrl})
+      resolve(true)
+    } catch (error) {
+      reject(error)
+    }
+  })
+}
+
 module.exports = {
   createNew,
-  getAll
+  getAll,
+  getShortOne,
+  deleteShort
 }

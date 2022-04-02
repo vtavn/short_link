@@ -24,7 +24,7 @@
     }
   ```
  - Show All Link: /v1/short/all
-  -reponse
+  - reponse
   ```json
     {
       "status": true,
@@ -55,3 +55,20 @@
       ]
     }
   ```
+
+ - Delete Short Link: /v1/short/delete/:short
+ - reponse
+    - success
+    ```json
+    {
+        "status": true,
+        "message": "Delete Success"
+    }
+    ```
+    - error
+    ```json
+    {
+      "status": false,
+      "message": "Short Link Not Found."
+    }
+    ```
