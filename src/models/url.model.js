@@ -8,6 +8,7 @@ let UrlSchema = new Schema({
   passwords: { type: String, default: null },
   totalView: { type: Number, default: 0 },
   createdAt: { type: Number, default: Date.now },
+  lastViewAt: { type: Number, default: null },
   updatedAt: { type: Number, default: null },
   deletedAt: { type: Number, default: null }
 })
