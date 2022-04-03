@@ -22,9 +22,9 @@ router.route('/delete/:short')
   .delete(UrlController.deleteShort)
 
 /**
- * /v1/short/goto/:short
+ * /v1/short/info/:short
  */
-router.route('/goto')
+router.route('/info')
   .post(UrlController.getOriginShort)
 
 export const UrlRoutes = router

@@ -73,7 +73,7 @@
     }
     ```
 
- - Get Info Short Link: (POST) /v1/short/goto
+ - Get Info Short Link: (POST) /v1/short/info
   - request
     ```json
       {
