@@ -3,7 +3,7 @@
  - update...
 
 ## API URL
- - Create New Link: /v1/short/create
+ - Create New Link: (POST) /v1/short/create
   - request
   ```json
     {
@@ -23,7 +23,7 @@
       }
     }
   ```
- - Show All Link: /v1/short/all
+ - Show All Link: (GET) /v1/short/all
   - reponse
   ```json
     {
@@ -56,7 +56,7 @@
     }
   ```
 
- - Delete Short Link: /v1/short/delete/:short
+ - Delete Short Link: (DELETE) /v1/short/delete/:short
  - reponse
     - success
     ```json
@@ -72,3 +72,38 @@
       "message": "Short Link Not Found."
     }
     ```
+ - Get Info Short Link: (POST) /v1/short/goto
+  - request
+    ```json
+      {
+        "shortUrl": "291L5Sd",
+        "password": ""
+      }
+    ```
+  - reponse
+      - success
+        ```json
+          {
+              "status": true,
+              "message": "Get Success",
+              "data": {
+                  "originUrl": "https://www.facebook.com/1",
+                  "totalView": 0,
+                  "createdAt": 1648970045612,
+                  "updatedAt": null
+              }
+          }
+        ```
+        - error
+        ```json
+          {
+            "status": false,
+            "message": "Password Error."
+          }
+        ```
+        ```json
+          {
+              "status": false,
+              "message": "Short Link Not Found."
+          }
+        ```
