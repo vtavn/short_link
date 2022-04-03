@@ -57,7 +57,7 @@
   ```
 
  - Delete Short Link: (DELETE) /v1/short/delete/:short
- - reponse
+  - reponse
     - success
     ```json
     {
@@ -72,6 +72,7 @@
       "message": "Short Link Not Found."
     }
     ```
+
  - Get Info Short Link: (POST) /v1/short/goto
   - request
     ```json
