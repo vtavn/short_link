@@ -95,7 +95,7 @@
               }
           }
         ```
-        - error
+      - error
         ```json
           {
             "status": false,
