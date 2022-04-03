@@ -14,8 +14,17 @@ router.route('/create')
  */
 router.route('/all')
   .get(UrlController.showAll)
-  
+
+/**
+ * /v1/short/delete/:short
+ */
 router.route('/delete/:short')
   .delete(UrlController.deleteShort)
- 
+
+/**
+ * /v1/short/goto/:short
+ */
+router.route('/goto')
+  .post(UrlController.getOriginShort)
+
 export const UrlRoutes = router

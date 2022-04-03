@@ -70,8 +70,39 @@ const deleteShort = async (req, res) => {
   }
 }
 
+const getOriginShort = async (req, res) => {
+  const param = req.body
+  try {
+    const findShort = await url.getShortOne(param.shortUrl)
+    if(findShort) {
+
+      const dataShow = {
+        originUrl: findShort.originUrl,
+        totalView: findShort.totalView,
+        createdAt: findShort.createdAt,
+        updatedAt: findShort.updatedAt
+      }
+
+      if (findShort.passwords) {
+        if (param.password === findShort.passwords) {
+          return res.status(HttpStatusCode.OK).json({ status: true, message: 'Get Success', data : dataShow})
+        } else {
+          return res.status(HttpStatusCode.UNAUTHENTICATED).json({ status: false, message: 'Password Error.' })
+        }
+      } else {
+        return res.status(HttpStatusCode.OK).json({ status: true, message: 'Get Success', data : dataShow})
+      }
+    } else {
+      return res.status(HttpStatusCode.BAD_REQUEST).json({ status: false, message: 'Short Link Not Found.' })
+    } 
+  } catch (error) {
+    return res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({ status: false, message: error })
+  }
+}
+
 export const UrlController = {
   createNew,
   showAll,
-  deleteShort
+  deleteShort,
+  getOriginShort
 }
