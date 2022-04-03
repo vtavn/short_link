@@ -88,10 +88,11 @@
               "status": true,
               "message": "Get Success",
               "data": {
-                  "originUrl": "https://www.facebook.com/1",
-                  "totalView": 0,
-                  "createdAt": 1648970045612,
-                  "updatedAt": null
+                  "originUrl": "https://www.facebook.com/2",
+                  "totalView": 15,
+                  "lastViewAt": 1649016787642,
+                  "updatedAt": null,
+                  "createdAt": 1649016681366
               }
           }
         ```

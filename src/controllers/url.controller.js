@@ -73,16 +73,15 @@ const deleteShort = async (req, res) => {
 const getOriginShort = async (req, res) => {
   const param = req.body
   try {
-    const findShort = await url.getShortOne(param.shortUrl)
+    const findShort = await url.findAndUpdateShort(param.shortUrl)
     if(findShort) {
-
       const dataShow = {
         originUrl: findShort.originUrl,
         totalView: findShort.totalView,
-        createdAt: findShort.createdAt,
-        updatedAt: findShort.updatedAt
+        lastViewAt: findShort.lastViewAt,
+        updatedAt: findShort.updatedAt,
+        createdAt: findShort.createdAt
       }
-
       if (findShort.passwords) {
         if (param.password === findShort.passwords) {
           return res.status(HttpStatusCode.OK).json({ status: true, message: 'Get Success', data : dataShow})

@@ -48,7 +48,18 @@ const deleteShort = (shortUrl) => {
   return new Promise( async (resolve, reject) => {
     try {
       const deleteShort = await UrlModel.deleteOne({ shortUrl: shortUrl})
-      resolve(true)
+      resolve(deleteShort)
+    } catch (error) {
+      reject(error)
+    }
+  })
+}
+
+const findAndUpdateShort = (shortUrl) => {
+  return new Promise( async (resolve, reject) => {
+    try {
+      const findShort = await UrlModel.findOneAndUpdate({ shortUrl: shortUrl }, { $inc: { totalView: 1 }, lastViewAt: Date.now() })
+      resolve(findShort)
     } catch (error) {
       reject(error)
     }
@@ -59,5 +70,6 @@ module.exports = {
   createNew,
   getAll,
   getShortOne,
-  deleteShort
+  deleteShort,
+  findAndUpdateShort
 }
