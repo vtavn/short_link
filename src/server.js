@@ -7,6 +7,7 @@ const app = express()
 
 // enable req.body data
 app.use(express.json())
+app.use(express.urlencoded())
 
 // user APIs v1
 app.use('/v1', apiV1)
