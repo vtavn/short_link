@@ -2,6 +2,75 @@ import { HttpStatusCode, RandomString } from '../utils/constants.utils'
 import validUrl from 'valid-url'
 import { url } from '../services/index'
 
+
+const deleteShort = async (req, res) => {
+  const param = req.params
+  try {
+    const findShort = await url.getShortOne(param.short)
+    if(findShort) {
+      const deleteShort = await url.deleteShort(findShort.shortUrl)
+      if (deleteShort) {
+        return res.status(HttpStatusCode.OK).json({ status: true, message: 'Delete Success' })
+      } else {
+        return res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({ status: false, message: 'Server Error Connect.' })
+      }
+    } else {
+      return res.status(HttpStatusCode.BAD_REQUEST).json({ status: false, message: 'Short Link Not Found.' })
+    }
+  } catch (error) {
+    return res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({ status: false, message: error })
+  }
+}
+
+const showAll = async (req, res) => {
+  try {
+    const getAll = await url.getAll()
+    if (!getAll) {
+      return res.status(HttpStatusCode.OK).json({ status: true, message: 'Data not found' })
+    } else {
+      const allData = {
+        status: true,
+        message: 'Get Data Success',
+        data: getAll
+      }
+      return res.status(HttpStatusCode.OK).json(allData)
+    }
+
+  } catch (error) {
+    return res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({ status: false, message: error })
+  }
+}
+
+
+const getOriginShort = async (req, res) => {
+  const param = req.body
+  try {
+    const findShort = await url.findAndUpdateShort(param.shortUrl)
+    if(findShort) {
+      const dataShow = {
+        originUrl: findShort.originUrl,
+        totalView: findShort.totalView,
+        lastViewAt: findShort.lastViewAt,
+        updatedAt: findShort.updatedAt,
+        createdAt: findShort.createdAt
+      }
+      if (findShort.passwords) {
+        if (param.password === findShort.passwords) {
+          return res.status(HttpStatusCode.OK).json({ status: true, message: 'Get Success', data : dataShow})
+        } else {
+          return res.status(HttpStatusCode.UNAUTHENTICATED).json({ status: false, message: 'Password Error.' })
+        }
+      } else {
+        return res.status(HttpStatusCode.OK).json({ status: true, message: 'Get Success', data : dataShow})
+      }
+    } else {
+      return res.status(HttpStatusCode.BAD_REQUEST).json({ status: false, message: 'Short Link Not Found.' })
+    } 
+  } catch (error) {
+    return res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({ status: false, message: error })
+  }
+}
+
 const createNew = async (req, res) => {
   const param = req.body
 
@@ -32,72 +101,6 @@ const createNew = async (req, res) => {
   } 
 }
 
-const showAll = async (req, res) => {
-  try {
-    const getAll = await url.getAll()
-    if (!getAll) {
-      return res.status(HttpStatusCode.OK).json({ status: true, message: 'Data not found' })
-    } else {
-      const allData = {
-        status: true,
-        message: 'Get Data Success',
-        data: getAll
-      }
-      return res.status(HttpStatusCode.OK).json(allData)
-    }
-
-  } catch (error) {
-    return res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({ status: false, message: error })
-  }
-}
-
-const deleteShort = async (req, res) => {
-  const param = req.params
-  try {
-    const findShort = await url.getShortOne(param.short)
-    if(findShort) {
-      const deleteShort = await url.deleteShort(findShort.shortUrl)
-      if (deleteShort) {
-        return res.status(HttpStatusCode.OK).json({ status: true, message: 'Delete Success' })
-      } else {
-        return res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({ status: false, message: 'Server Error Connect.' })
-      }
-    } else {
-      return res.status(HttpStatusCode.BAD_REQUEST).json({ status: false, message: 'Short Link Not Found.' })
-    }
-  } catch (error) {
-    return res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({ status: false, message: error })
-  }
-}
-
-const getOriginShort = async (req, res) => {
-  const param = req.body
-  try {
-    const findShort = await url.findAndUpdateShort(param.shortUrl)
-    if(findShort) {
-      const dataShow = {
-        originUrl: findShort.originUrl,
-        totalView: findShort.totalView,
-        lastViewAt: findShort.lastViewAt,
-        updatedAt: findShort.updatedAt,
-        createdAt: findShort.createdAt
-      }
-      if (findShort.passwords) {
-        if (param.password === findShort.passwords) {
-          return res.status(HttpStatusCode.OK).json({ status: true, message: 'Get Success', data : dataShow})
-        } else {
-          return res.status(HttpStatusCode.UNAUTHENTICATED).json({ status: false, message: 'Password Error.' })
-        }
-      } else {
-        return res.status(HttpStatusCode.OK).json({ status: true, message: 'Get Success', data : dataShow})
-      }
-    } else {
-      return res.status(HttpStatusCode.BAD_REQUEST).json({ status: false, message: 'Short Link Not Found.' })
-    } 
-  } catch (error) {
-    return res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({ status: false, message: error })
-  }
-}
 
 export const UrlController = {
   createNew,
