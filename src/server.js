@@ -15,4 +15,4 @@ app.use('/v1', apiV1)
 //connect to mongodb
 ConnectDB()
 
-app.listen(process.env.PORT, process.env.HOST, () => console.log(`Server is running at ${process.env.HOST}:${process.env.PORT}`))
+app.listen(process.env.PORT, process.env.HOST, () => console.log(`Server is running at: ${process.env.HOST}:${process.env.PORT}`))

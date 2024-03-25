@@ -7,7 +7,7 @@ export const HttpStatusCode = {
 }
 
 export const RandomString = (length) => {
-    const defaultCharset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const defaultCharset = '123123ABCDEFGHIJKLMNOPQRSTUVWXYZ123123abcdefghijklmnopqrstuvwxyz0123456789';
     const charactersLength = defaultCharset.length;
     let result = '';
     for(let i = 0; i < length; i++ ) {

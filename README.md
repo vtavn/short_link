@@ -1,4 +1,4 @@
-# Short Link V1
+# Short Link V1.0.6
 ## using
  - update...
 
@@ -7,7 +7,7 @@
   - request
   ```json
     {
-      "link": "https://www.facebook.com/5",
+      "link": "https://www.facebook.com/56",
       "password": ""
     }
   ```
@@ -17,7 +17,7 @@
       "status": true,
       "message": "Link Success!",
       "data": {
-          "originUrl": "https://www.facebook.com/5",
+          "originUrl": "https://www.facebook.com/56",
           "shortUrl": "http://localhost:3300/srJ3UhW",
           "totalView": 0
       }

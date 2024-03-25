@@ -22,17 +22,6 @@ const createNew = (originUrl, shortUrl, passwords) => {
   })
 }
 
-const getAll = () => {
-  return new Promise( async (resolve, reject) => {
-    try {
-      const getAll = await UrlModel.find()
-      resolve(getAll)
-    } catch (error) {
-      reject(error)
-    }
-  })
-}
-
 const getShortOne = (shortUrl) => {
   return new Promise( async (resolve, reject) => {
     try {
@@ -49,6 +38,17 @@ const deleteShort = (shortUrl) => {
     try {
       const deleteShort = await UrlModel.deleteOne({ shortUrl: shortUrl})
       resolve(deleteShort)
+    } catch (error) {
+      reject(error)
+    }
+  })
+}
+
+const getAll = () => {
+  return new Promise( async (resolve, reject) => {
+    try {
+      const getAll = await UrlModel.find()
+      resolve(getAll)
     } catch (error) {
       reject(error)
     }
